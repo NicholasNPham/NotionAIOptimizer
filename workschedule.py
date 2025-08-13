@@ -13,7 +13,7 @@ driver = webdriver.Chrome(service=service)
 # Website link to Employee Portal (ALDI)
 driver.get("https://myaldius.staffbase.com/content/page/609ea1450e49ad1c940fd1ab")
 
-wait = WebDriverWait(driver, 10)
+wait = WebDriverWait(driver, 15)
 
 # First Step
 initialSignInButton = wait.until(EC.element_to_be_clickable((By.ID, "public-login-hint")))
@@ -38,6 +38,19 @@ submitLoginButton.click()
 # Clicking MySchedule Button
 myScheduleButton = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "quick-links-widget")))
 myScheduleButton.click()
+
+time.sleep(2)  # give some buffer for redirects
+
+# Clicking Schedules in MySchedule
+iframes = driver.find_elements(By.TAG_NAME, "iframe")
+
+if len(iframes) > 0:
+    driver.switch_to.frame(iframes[0])  # adjust index if necessary
+
+schedule_span = wait.until(EC.presence_of_element_located((By.XPATH, "//span[text()='Schedules']")))
+schedule_link = schedule_span.find_element(By.XPATH, "./ancestor::a")
+driver.execute_script("arguments[0].scrollIntoView(true);", schedule_link)
+schedule_link.click()
 
 time.sleep(10)
 
