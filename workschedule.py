@@ -35,6 +35,10 @@ inputPassword.send_keys(password)
 submitLoginButton = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "type-submit")))
 submitLoginButton.click()
 
+# Clicking MySchedule Button
+myScheduleButton = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "quick-links-widget")))
+myScheduleButton.click()
+
 time.sleep(10)
 
 driver.quit()
