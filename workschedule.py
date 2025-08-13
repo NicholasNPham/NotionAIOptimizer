@@ -13,24 +13,27 @@ driver = webdriver.Chrome(service=service)
 # Website link to Employee Portal (ALDI)
 driver.get("https://myaldius.staffbase.com/content/page/609ea1450e49ad1c940fd1ab")
 
-# First Step
 wait = WebDriverWait(driver, 10)
-buttonOne = wait.until(EC.element_to_be_clickable((By.ID, "public-login-hint")))
-buttonOne.click()
+
+# First Step
+initialSignInButton = wait.until(EC.element_to_be_clickable((By.ID, "public-login-hint")))
+initialSignInButton.click()
 
 # Second Step, Gain Access to Login Input
-wait = WebDriverWait(driver, 10)
-buttonTwo = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "type-uncollapse")))
-buttonTwo.click()
+credentialSignInButton = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "type-uncollapse")))
+credentialSignInButton.click()
 
 #Input Username and Password
-wait = WebDriverWait(driver, 10)
 inputUsername = driver.find_element(By.ID, "identifier")
 inputUsername.clear()
 inputUsername.send_keys(username)
 inputPassword = driver.find_element(By.ID, "secret")
 inputPassword.clear()
 inputPassword.send_keys(password)
+
+# Final Boss, Sign in after text field input
+submitLoginButton = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "type-submit")))
+submitLoginButton.click()
 
 time.sleep(10)
 
