@@ -17,3 +17,6 @@ Notes:
 
 Selenium:
 Link for Educational Purposes: https://www.youtube.com/watch?v=NB8OceGZGjA
+
+August 13, 2025:
+Web scraping my employee website has been done, I now need to move data from the website to Notion Database.
