@@ -47,10 +47,15 @@ iframes = driver.find_elements(By.TAG_NAME, "iframe")
 if len(iframes) > 0:
     driver.switch_to.frame(iframes[0])  # adjust index if necessary
 
-schedule_span = wait.until(EC.presence_of_element_located((By.XPATH, "//span[text()='Schedules']")))
-schedule_link = schedule_span.find_element(By.XPATH, "./ancestor::a")
-driver.execute_script("arguments[0].scrollIntoView(true);", schedule_link)
-schedule_link.click()
+currentWeekSchedule = wait.until(EC.presence_of_element_located((By.XPATH, "//span[text()='Schedules']")))
+scheduleLink = currentWeekSchedule.find_element(By.XPATH, "./ancestor::a")
+driver.execute_script("arguments[0].scrollIntoView(true);", scheduleLink)
+scheduleLink.click()
+
+time.sleep(2)  # give some buffer for redirects
+
+nextWeekSchedule = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "cmp-date-navigation__icon-arrow-next")))
+nextWeekSchedule.click()
 
 time.sleep(10)
 
