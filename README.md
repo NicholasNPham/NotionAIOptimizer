@@ -20,3 +20,20 @@ Link for Educational Purposes: https://www.youtube.com/watch?v=NB8OceGZGjA
 
 August 13, 2025:
 Web scraping my employee website has been done, I now need to move data from the website to Notion Database.
+
+Example:
+
+Shift: 5:30 AM - 1:30 PM - cmp-schedule-item__schedule-content__hours-range
+Date: 8-11 - cmp-schedule-item__schedule-date
+Hours: 8 - total-hours
+Status: Completed 
+
+The Status property will have 3 statuses:
+   completed; past,
+   today; today shift,
+   upcoming; future date based on today's date, import time
+
+Three Type of scheduled shifts:
+   working,
+   no scheduled shifts,
+   Day off.
