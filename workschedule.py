@@ -3,6 +3,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchElementException
 from key import *
 
 import time
@@ -52,14 +53,25 @@ scheduleLink = currentWeekSchedule.find_element(By.XPATH, "./ancestor::a")
 driver.execute_script("arguments[0].scrollIntoView(true);", scheduleLink)
 scheduleLink.click()
 
-shiftTime = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".cmp-schedule-item__schedule-content__hours-range.shift .range-hours")))
-dateTime = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".cmp-schedule-item__schedule-date__date")))
-HourTime = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".total-hour")))
+scheduleDays = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".cmp-schedule-item")))
+for days in scheduleDays:
+    day = days.find_element(By.CSS_SELECTOR, ".cmp-schedule-item__schedule-date__day").text
+    date = days.find_element(By.CSS_SELECTOR, ".cmp-schedule-item__schedule-date__date").text
 
-print(shiftTime.text)
-print(dateTime.text)
-print(HourTime.text)
+    try:
+        shift = days.find_element(By.CSS_SELECTOR, ".cmp-schedule-item__schedule-content__hours-range.shift .range-hours").text
+    except NoSuchElementException:
+        shift = "No Shift Scheduled"
 
+    try:
+        hour = days.find_element(By.CSS_SELECTOR, ".total-hour").text
+    except NoSuchElementException:
+        hour = 0
+
+    print(date)
+    print(shift)
+    print(hour)
+    print("-------")
 
 # time.sleep(2)  # give some buffer for redirects
 #
