@@ -13,7 +13,7 @@ driver = webdriver.Chrome(service=service)
 # Website link to Employee Portal (ALDI)
 driver.get("https://myaldius.staffbase.com/content/page/609ea1450e49ad1c940fd1ab")
 
-wait = WebDriverWait(driver, 15)
+wait = WebDriverWait(driver, 10)
 
 # First Step
 initialSignInButton = wait.until(EC.element_to_be_clickable((By.ID, "public-login-hint")))
@@ -52,11 +52,20 @@ scheduleLink = currentWeekSchedule.find_element(By.XPATH, "./ancestor::a")
 driver.execute_script("arguments[0].scrollIntoView(true);", scheduleLink)
 scheduleLink.click()
 
-time.sleep(2)  # give some buffer for redirects
+shiftTime = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".cmp-schedule-item__schedule-content__hours-range.shift .range-hours")))
+dateTime = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".cmp-schedule-item__schedule-date__date")))
+HourTime = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".total-hour")))
 
-nextWeekSchedule = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "cmp-date-navigation__icon-arrow-next")))
-nextWeekSchedule.click()
+print(shiftTime.text)
+print(dateTime.text)
+print(HourTime.text)
+
+
+# time.sleep(2)  # give some buffer for redirects
+#
+# nextWeekSchedule = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "cmp-date-navigation__icon-arrow-next")))
+# nextWeekSchedule.click()
 
 time.sleep(10)
 
-driver.quit()
+# driver.quit()
