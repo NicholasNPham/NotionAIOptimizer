@@ -53,8 +53,9 @@ scheduleLink = currentWeekSchedule.find_element(By.XPATH, "./ancestor::a")
 driver.execute_script("arguments[0].scrollIntoView(true);", scheduleLink)
 scheduleLink.click()
 
-scheduleDays = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".cmp-schedule-item")))
-for days in scheduleDays:
+# Iterating Through Current Week to Scrape Data Needed
+currentWeekScheduleDays = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".cmp-schedule-item")))
+for days in currentWeekScheduleDays:
     day = days.find_element(By.CSS_SELECTOR, ".cmp-schedule-item__schedule-date__day").text
     date = days.find_element(By.CSS_SELECTOR, ".cmp-schedule-item__schedule-date__date").text
 
@@ -73,11 +74,34 @@ for days in scheduleDays:
     print(hour)
     print("-------")
 
-# time.sleep(2)  # give some buffer for redirects
-#
-# nextWeekSchedule = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "cmp-date-navigation__icon-arrow-next")))
-# nextWeekSchedule.click()
+time.sleep(2)  # give some buffer for redirects
+
+nextWeekSchedule = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "cmp-date-navigation__icon-arrow-next")))
+nextWeekSchedule.click()
+
+time.sleep(2)  # give some buffer for redirects
+
+# Iterating Through Next Week to Scrape Data Needed
+nextWeekScheduleDays = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".cmp-schedule-item")))
+for days in nextWeekScheduleDays:
+    day = days.find_element(By.CSS_SELECTOR, ".cmp-schedule-item__schedule-date__day").text
+    date = days.find_element(By.CSS_SELECTOR, ".cmp-schedule-item__schedule-date__date").text
+
+    try:
+        shift = days.find_element(By.CSS_SELECTOR, ".cmp-schedule-item__schedule-content__hours-range.shift .range-hours").text
+    except NoSuchElementException:
+        shift = "No Shift Scheduled"
+
+    try:
+        hour = days.find_element(By.CSS_SELECTOR, ".total-hour").text
+    except NoSuchElementException:
+        hour = 0
+
+    print(date)
+    print(shift)
+    print(hour)
+    print("-------")
 
 time.sleep(10)
 
-# driver.quit()
+driver.quit()
