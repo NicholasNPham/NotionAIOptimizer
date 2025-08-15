@@ -37,3 +37,13 @@ Three Type of scheduled shifts:
    working,
    no scheduled shifts,
    Day off.
+
+Notes for Notion Database:
+1. The "Hour" string will have to turn into a integer removing "hs" keeping the decimal point
+2. The "date" string will have to be converted to a iso format YYYY-MM-DD to allow database read
+3. the "shift" string will be split into two strings, example:
+   4. '5:30 AM - 2:00 PM'
+   5. '5:30 AM' , '2:00 PM'
+   6. date + start time, date + end time
+
+After this this will allow me to input data to notion database and create time blocks automatically.
