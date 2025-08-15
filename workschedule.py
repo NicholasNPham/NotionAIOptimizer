@@ -53,26 +53,32 @@ scheduleLink = currentWeekSchedule.find_element(By.XPATH, "./ancestor::a")
 driver.execute_script("arguments[0].scrollIntoView(true);", scheduleLink)
 scheduleLink.click()
 
+dictSchedule = {}
+
 # Iterating Through Current Week to Scrape Data Needed
 currentWeekScheduleDays = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".cmp-schedule-item")))
+
 for days in currentWeekScheduleDays:
-    day = days.find_element(By.CSS_SELECTOR, ".cmp-schedule-item__schedule-date__day").text
     date = days.find_element(By.CSS_SELECTOR, ".cmp-schedule-item__schedule-date__date").text
+
+    shiftHourList = []
 
     try:
         shift = days.find_element(By.CSS_SELECTOR, ".cmp-schedule-item__schedule-content__hours-range.shift .range-hours").text
+        shiftHourList.append(shift)
     except NoSuchElementException:
         shift = "No Shift Scheduled"
+        shiftHourList.append(shift)
 
     try:
         hour = days.find_element(By.CSS_SELECTOR, ".total-hour").text
+
+        shiftHourList.append(hour)
     except NoSuchElementException:
         hour = 0
+        shiftHourList.append(hour)
 
-    print(date)
-    print(shift)
-    print(hour)
-    print("-------")
+    dictSchedule[date] = shiftHourList
 
 time.sleep(2)  # give some buffer for redirects
 
@@ -84,23 +90,29 @@ time.sleep(2)  # give some buffer for redirects
 # Iterating Through Next Week to Scrape Data Needed
 nextWeekScheduleDays = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".cmp-schedule-item")))
 for days in nextWeekScheduleDays:
-    day = days.find_element(By.CSS_SELECTOR, ".cmp-schedule-item__schedule-date__day").text
     date = days.find_element(By.CSS_SELECTOR, ".cmp-schedule-item__schedule-date__date").text
 
+    shiftHourList = []
+
     try:
-        shift = days.find_element(By.CSS_SELECTOR, ".cmp-schedule-item__schedule-content__hours-range.shift .range-hours").text
+        shift = days.find_element(By.CSS_SELECTOR,".cmp-schedule-item__schedule-content__hours-range.shift .range-hours").text
+        shiftHourList.append(shift)
     except NoSuchElementException:
         shift = "No Shift Scheduled"
+        shiftHourList.append(shift)
 
     try:
         hour = days.find_element(By.CSS_SELECTOR, ".total-hour").text
+
+        shiftHourList.append(hour)
     except NoSuchElementException:
         hour = 0
+        shiftHourList.append(hour)
 
-    print(date)
-    print(shift)
-    print(hour)
-    print("-------")
+    dictSchedule[date] = shiftHourList
+
+for key,value in dictSchedule.items():
+    print(key, value)
 
 time.sleep(10)
 
