@@ -8,7 +8,10 @@ from key import *
 
 import time
 
-service = Service(executable_path="chromedriver.exe")
+# Line below for WindowsOS
+# service = Service(executable_path="./chromedriver.exe")
+# Line Below for MacOS
+service = Service(executable_path="./chromedriver")
 driver = webdriver.Chrome(service=service)
 
 # Website link to Employee Portal (ALDI)
@@ -113,6 +116,13 @@ for days in nextWeekScheduleDays:
 
 for key,value in dictSchedule.items():
     print(key, value)
+
+# Function to convert MM-DD date to ISO Date YYYY-MM-DD
+# def dateConversion(date):
+
+# Function to Turn String Shift into two Strings and into 24 Hours
+# Function to Remove HR from Hour string
+
 
 time.sleep(10)
 
