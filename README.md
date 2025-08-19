@@ -47,3 +47,9 @@ Notes for Notion Database:
    6. date + start time, date + end time
 
 After this this will allow me to input data to notion database and create time blocks automatically.
+
+August 19th, 2025:
+Added function to turn date into ISO date and it worked well, need to figure out how to create two different time dates that creates start time and end time to create time blocks on notion calendar database.
+also going to optimize code to use less lines getting really long. might focus on how code should look like.
+
+Pep 8 formatting for Python Code: https://peps.python.org/pep-0008/
