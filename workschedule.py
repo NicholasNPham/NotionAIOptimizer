@@ -4,7 +4,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
+
 from key import *
+from function import newDate
 
 import time
 import platform
@@ -119,15 +121,13 @@ for days in nextWeekScheduleDays:
 
     dictSchedule[date] = shiftHourList
 
-for key,value in dictSchedule.items():
-    print(key, value)
-
-# Function to convert MM-DD date to ISO Date YYYY-MM-DD
-# def dateConversion(date):
+for date,value in dictSchedule.items():
+    # Function to convert MM-DD date to ISO Date YYYY-MM-DD
+    formattedDate = newDate(date)
+    print(formattedDate, value)
 
 # Function to Turn String Shift into two Strings and into 24 Hours
 # Function to Remove HR from Hour string
-
 
 time.sleep(10)
 

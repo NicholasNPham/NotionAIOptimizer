@@ -10,6 +10,3 @@ def newDate(date):
 
     isoDate = str(year)+ '-' + date
     return isoDate
-
-stringExample = "1-20"
-print(newDate(stringExample))
