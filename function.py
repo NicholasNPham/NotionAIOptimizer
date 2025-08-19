@@ -10,3 +10,17 @@ def newDate(date):
 
     isoDate = str(year)+ '-' + date
     return isoDate
+
+string = "7.00hr"
+
+def formattedHour(hour):
+    removedLetterString = []
+    for char in hour:
+       if char.isdigit() or char == '.':
+           removedLetterString.append(char)
+    print(removedLetterString)
+    return "".join(removedLetterString)
+
+newHour = (formattedHour(string))
+print(newHour)
+
