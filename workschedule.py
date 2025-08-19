@@ -7,11 +7,16 @@ from selenium.common.exceptions import NoSuchElementException
 from key import *
 
 import time
+import platform
 
-# Line below for WindowsOS
-# service = Service(executable_path="./chromedriver.exe")
-# Line Below for MacOS
-service = Service(executable_path="./chromedriver")
+
+if platform.system() == 'Windows':
+    service = Service(executable_path="./chromedriver.exe")
+elif platform.system() == 'Darwin':
+    service = Service(executable_path="./chromedriver")
+else:
+    raise OSError("Unsupported Platform or ChromeDriver not Found")
+
 driver = webdriver.Chrome(service=service)
 
 # Website link to Employee Portal (ALDI)
