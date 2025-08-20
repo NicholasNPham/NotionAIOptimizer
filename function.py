@@ -2,9 +2,8 @@ from datetime import datetime
 
 def newDate(date):
     now = datetime.now()
-    formattingDate = "%m-%d"
-    date = datetime.strptime(date,formattingDate)
-    isoDate = f'{now.year}-{date.strftime("%m-%d")}'
+    month, day = map(int, date.split('-'))
+    isoDate = f'{now.year}-{month:02d}-{day:02d}'
     return isoDate
 
 def formattedHour(hour):
@@ -18,7 +17,7 @@ def formattedHour(hour):
 string = '02:00 PM - 09:00 PM'
 stringTwo = "2-4"
 
-def timeBlock(shift,date):
+def timeBlock(shift):
     delimiter = "-"
     shift = shift.split(delimiter)
     startTime = f'{newDate(stringTwo)} {shift[0].strip()}'
@@ -27,4 +26,4 @@ def timeBlock(shift,date):
 
     return timeBlockList
 
-print(timeBlock(string,stringTwo))
+print(timeBlock(string))
