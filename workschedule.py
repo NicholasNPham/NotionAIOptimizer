@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 
 from key import *
-from function import newDate
+from function import newDate, formattedHour
 
 import time
 import platform
@@ -56,6 +56,7 @@ def scrapeWeek():
     dictSchedule = {}
     for days in daysInWeek:
         date = days.find_element(By.CSS_SELECTOR, ".cmp-schedule-item__schedule-date__date").text
+        date = newDate(date)
 
         shiftHourList = []
 
@@ -69,7 +70,7 @@ def scrapeWeek():
         try:
             hour = days.find_element(By.CSS_SELECTOR, ".total-hour").text
 
-            shiftHourList.append(hour)
+            shiftHourList.append(formattedHour(hour))
         except NoSuchElementException:
             hour = 0
             shiftHourList.append(hour)
@@ -78,6 +79,7 @@ def scrapeWeek():
 
     return dictSchedule
 
+# Calling Function first Time
 dictSchedule = scrapeWeek()
 
 nextWeekSchedule = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "cmp-date-navigation__icon-arrow-next"))).click()
@@ -85,15 +87,13 @@ nextWeekSchedule = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "cmp-da
 # Must be keep to allow display text of next week shifts after "cmp-date-navigation__icon-arrow-next" has been clicked.
 time.sleep(2)
 
+# Calling Function Second Time (Updating DictSchedule)
 dictSchedule.update(scrapeWeek())
 
-# Function to convert MM-DD date to ISO Date YYYY-MM-DD
-for date,value in dictSchedule.items():
-    formattedDate = newDate(date)
-    print(formattedDate, value)
+for date, shiftAndHours in dictSchedule.items():
+    print(date, shiftAndHours)
 
 # Function to Turn String Shift into two Strings and into 24 Hours
-# Function to Remove HR from Hour string
 
 time.sleep(10)
 
