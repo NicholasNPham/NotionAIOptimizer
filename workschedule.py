@@ -20,39 +20,28 @@ else:
     raise OSError("Unsupported Platform or ChromeDriver not Found")
 
 driver = webdriver.Chrome(service=service)
+wait = WebDriverWait(driver, 10)
 
 # Website link to Employee Portal (ALDI)
 driver.get("https://myaldius.staffbase.com/content/page/609ea1450e49ad1c940fd1ab")
 
-wait = WebDriverWait(driver, 10)
-
-# First Step
+# Login Sequence
 initialSignInButton = wait.until(EC.element_to_be_clickable((By.ID, "public-login-hint"))).click()
-
-# Second Step, Gain Access to Login Input
 credentialSignInButton = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "type-uncollapse"))).click()
 
 #Input Username and Password
-inputUsername = driver.find_element(By.ID, "identifier")
-inputUsername.clear()
-inputUsername.send_keys(username)
-inputPassword = driver.find_element(By.ID, "secret")
-inputPassword.clear()
-inputPassword.send_keys(password)
+inputUsername = driver.find_element(By.ID, "identifier").send_keys(username)
+inputPassword = driver.find_element(By.ID, "secret").send_keys(password)
+submitLoginButton = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "type-submit"))).click()
 
-# Final Boss, Sign in after text field input
-submitLoginButton = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "type-submit")))
-submitLoginButton.click()
+# Navigation to MySchedule Button
+myScheduleButton = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "quick-links-widget"))).click()
 
-# Clicking MySchedule Button
-myScheduleButton = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "quick-links-widget")))
-myScheduleButton.click()
-
-time.sleep(2)  # give some buffer for redirects
+# Must be Kept to Allow Click to "quick-links-widget"
+time.sleep(2)
 
 # Clicking Schedules in MySchedule
 iframes = driver.find_elements(By.TAG_NAME, "iframe")
-
 if len(iframes) > 0:
     driver.switch_to.frame(iframes[0])  # adjust index if necessary
 
@@ -64,29 +53,34 @@ scheduleLink.click()
 dictSchedule = {}
 
 # Iterating Through Current Week to Scrape Data Needed
-currentWeekScheduleDays = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".cmp-schedule-item")))
+def ScrapeWeek():
+    currentWeekScheduleDays = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".cmp-schedule-item")))
+    for days in currentWeekScheduleDays:
+        date = days.find_element(By.CSS_SELECTOR, ".cmp-schedule-item__schedule-date__date").text
 
-for days in currentWeekScheduleDays:
-    date = days.find_element(By.CSS_SELECTOR, ".cmp-schedule-item__schedule-date__date").text
+        shiftHourList = []
 
-    shiftHourList = []
+        try:
+            shift = days.find_element(By.CSS_SELECTOR,
+                                      ".cmp-schedule-item__schedule-content__hours-range.shift .range-hours").text
+            shiftHourList.append(shift)
+        except NoSuchElementException:
+            shift = "No Shift Scheduled"
+            shiftHourList.append(shift)
 
-    try:
-        shift = days.find_element(By.CSS_SELECTOR, ".cmp-schedule-item__schedule-content__hours-range.shift .range-hours").text
-        shiftHourList.append(shift)
-    except NoSuchElementException:
-        shift = "No Shift Scheduled"
-        shiftHourList.append(shift)
+        try:
+            hour = days.find_element(By.CSS_SELECTOR, ".total-hour").text
 
-    try:
-        hour = days.find_element(By.CSS_SELECTOR, ".total-hour").text
+            shiftHourList.append(hour)
+        except NoSuchElementException:
+            hour = 0
+            shiftHourList.append(hour)
 
-        shiftHourList.append(hour)
-    except NoSuchElementException:
-        hour = 0
-        shiftHourList.append(hour)
+        dictSchedule[date] = shiftHourList
 
-    dictSchedule[date] = shiftHourList
+    return dictSchedule
+
+dictSchedule = ScrapeWeek()
 
 time.sleep(2)  # give some buffer for redirects
 
