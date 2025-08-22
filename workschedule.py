@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 
 from key import *
-from function import newDate, formattedHour
+from function import newDate, formattedHour, timeBlock
 
 import time
 import platform
@@ -91,10 +91,12 @@ time.sleep(2)
 dictSchedule.update(scrapeWeek())
 
 for date, shiftAndHours in dictSchedule.items():
-    print(date, shiftAndHours)
+    print(date, timeBlock(shiftAndHours[0]))
 
 # Function to Turn String Shift into two Strings and into 24 Hours
 
 time.sleep(10)
 
 driver.quit()
+
+# split(-) letting ["2 - 9"] -> [2,9]
