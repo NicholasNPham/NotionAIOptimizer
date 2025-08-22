@@ -26,23 +26,22 @@ def newFormattedTime(time):
         stringTime = f'{time[0:2]}:{time[3:5]}'
     return stringTime
 
-string = '02:00 PM - 09:00 PM'
-stringTwo = "2-4"
+# Testing Function String/StringTwo
+# string = '02:00 PM - 09:00 PM'
+# stringTwo = "2-4"
 
 def timeBlock(shift):
     if shift != "No Shift Scheduled":
         delimiter = "-"
-        print(shift)
         shift = shift.split(delimiter)
-
-        # Need to Delete Code after testing
-        for time in shift:
-            print(time.strip())
 
         startTime = f'{newDate(stringTwo)}T{newFormattedTime(shift[0].strip())}:00-05:00'
         endtime = f"{newDate(stringTwo)}T{newFormattedTime(shift[1].strip())}:00-05:00"
         timeBlockList = [startTime, endtime]
+    else:
+        timeBlockList = ['No Shift Scheduled', 0]
 
-        return timeBlockList
+    return timeBlockList
 
-print(timeBlock(string))
+# Calling timeBlock Function
+# print(timeBlock(string))
