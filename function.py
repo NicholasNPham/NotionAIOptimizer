@@ -18,11 +18,13 @@ def formattedHour(hour):
 
 def newFormattedTime(time):
     lastTwoChars = time[-2:]
-    if lastTwoChars == 'PM':
-        addingTime = int(time[:2]) + 12
-        stringTime = f'{addingTime}:{time[3:5]}'
+    if time == '12:00 PM':
+        stringTime = '12:00'
     elif time == '12:00 AM':
         stringTime = '00:00'
+    elif lastTwoChars == 'PM':
+        addingTime = int(time[:2]) + 12
+        stringTime = f'{addingTime}:{time[3:5]}'
     else:
         stringTime = f'{time[0:2]}:{time[3:5]}'
     return stringTime
