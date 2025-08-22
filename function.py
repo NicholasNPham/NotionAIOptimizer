@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 def newDate(date):
     now = datetime.now()
     month, day = map(int, date.split('-'))
@@ -30,13 +31,13 @@ def newFormattedTime(time):
 # string = '02:00 PM - 09:00 PM'
 # stringTwo = "2-4"
 
-def timeBlock(shift):
+def timeBlock(shift, date):
     if shift != "No Shift Scheduled":
         delimiter = "-"
         shift = shift.split(delimiter)
 
-        startTime = f'{newDate(stringTwo)}T{newFormattedTime(shift[0].strip())}:00-05:00'
-        endtime = f"{newDate(stringTwo)}T{newFormattedTime(shift[1].strip())}:00-05:00"
+        startTime = f'{date}T{newFormattedTime(shift[0].strip())}:00-05:00'
+        endtime = f"{date}T{newFormattedTime(shift[1].strip())}:00-05:00"
         timeBlockList = [startTime, endtime]
     else:
         timeBlockList = ['No Shift Scheduled', 0]
