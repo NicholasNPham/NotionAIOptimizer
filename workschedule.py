@@ -50,11 +50,10 @@ scheduleLink = currentWeekSchedule.find_element(By.XPATH, "./ancestor::a")
 driver.execute_script("arguments[0].scrollIntoView(true);", scheduleLink)
 scheduleLink.click()
 
-dictSchedule = {}
-
 # Iterating Through Current Week to Scrape Data Needed
 def scrapeWeek():
     daysInWeek = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".cmp-schedule-item")))
+    dictSchedule = {}
     for days in daysInWeek:
         date = days.find_element(By.CSS_SELECTOR, ".cmp-schedule-item__schedule-date__date").text
 
