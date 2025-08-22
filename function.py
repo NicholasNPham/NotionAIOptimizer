@@ -14,16 +14,35 @@ def formattedHour(hour):
     return "".join(removedLetterString)
 
 # Goal is to turn into [YYYY-MM-DD XX:XX AM, YYYY-MM-DD XX:XX PM]
+
+def newFormattedTime(time):
+    lastTwoChars = time[-2:]
+    if lastTwoChars == 'PM':
+        addingTime = int(time[:2]) + 12
+        stringTime = f'{addingTime}:{time[3:5]}'
+    elif time == '12:00 AM':
+        stringTime = '00:00'
+    else:
+        stringTime = f'{time[0:2]}:{time[3:5]}'
+    return stringTime
+
 string = '02:00 PM - 09:00 PM'
 stringTwo = "2-4"
 
 def timeBlock(shift):
-    delimiter = "-"
-    shift = shift.split(delimiter)
-    startTime = f'{newDate(stringTwo)} {shift[0].strip()}'
-    endtime = f"{newDate(stringTwo)} {shift[1].strip()}"
-    timeBlockList = [startTime, endtime]
+    if shift != "No Shift Scheduled":
+        delimiter = "-"
+        print(shift)
+        shift = shift.split(delimiter)
 
-    return timeBlockList
+        # Need to Delete Code after testing
+        for time in shift:
+            print(time.strip())
+
+        startTime = f'{newDate(stringTwo)}T{newFormattedTime(shift[0].strip())}:00-05:00'
+        endtime = f"{newDate(stringTwo)}T{newFormattedTime(shift[1].strip())}:00-05:00"
+        timeBlockList = [startTime, endtime]
+
+        return timeBlockList
 
 print(timeBlock(string))
