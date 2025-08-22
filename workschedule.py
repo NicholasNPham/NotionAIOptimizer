@@ -53,16 +53,15 @@ scheduleLink.click()
 dictSchedule = {}
 
 # Iterating Through Current Week to Scrape Data Needed
-def ScrapeWeek():
-    currentWeekScheduleDays = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".cmp-schedule-item")))
-    for days in currentWeekScheduleDays:
+def scrapeWeek():
+    daysInWeek = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".cmp-schedule-item")))
+    for days in daysInWeek:
         date = days.find_element(By.CSS_SELECTOR, ".cmp-schedule-item__schedule-date__date").text
 
         shiftHourList = []
 
         try:
-            shift = days.find_element(By.CSS_SELECTOR,
-                                      ".cmp-schedule-item__schedule-content__hours-range.shift .range-hours").text
+            shift = days.find_element(By.CSS_SELECTOR,".cmp-schedule-item__schedule-content__hours-range.shift .range-hours").text
             shiftHourList.append(shift)
         except NoSuchElementException:
             shift = "No Shift Scheduled"
@@ -80,41 +79,17 @@ def ScrapeWeek():
 
     return dictSchedule
 
-dictSchedule = ScrapeWeek()
+dictSchedule = scrapeWeek()
 
-time.sleep(2)  # give some buffer for redirects
+nextWeekSchedule = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "cmp-date-navigation__icon-arrow-next"))).click()
 
-nextWeekSchedule = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "cmp-date-navigation__icon-arrow-next")))
-nextWeekSchedule.click()
+# Must be keep to allow display text of next week shifts after "cmp-date-navigation__icon-arrow-next" has been clicked.
+time.sleep(2)
 
-time.sleep(2)  # give some buffer for redirects
+dictSchedule.update(scrapeWeek())
 
-# Iterating Through Next Week to Scrape Data Needed
-nextWeekScheduleDays = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".cmp-schedule-item")))
-for days in nextWeekScheduleDays:
-    date = days.find_element(By.CSS_SELECTOR, ".cmp-schedule-item__schedule-date__date").text
-
-    shiftHourList = []
-
-    try:
-        shift = days.find_element(By.CSS_SELECTOR,".cmp-schedule-item__schedule-content__hours-range.shift .range-hours").text
-        shiftHourList.append(shift)
-    except NoSuchElementException:
-        shift = "No Shift Scheduled"
-        shiftHourList.append(shift)
-
-    try:
-        hour = days.find_element(By.CSS_SELECTOR, ".total-hour").text
-
-        shiftHourList.append(hour)
-    except NoSuchElementException:
-        hour = 0
-        shiftHourList.append(hour)
-
-    dictSchedule[date] = shiftHourList
-
+# Function to convert MM-DD date to ISO Date YYYY-MM-DD
 for date,value in dictSchedule.items():
-    # Function to convert MM-DD date to ISO Date YYYY-MM-DD
     formattedDate = newDate(date)
     print(formattedDate, value)
 
