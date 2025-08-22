@@ -11,7 +11,7 @@ from function import newDate
 import time
 import platform
 
-
+# Check to see which OS coding is running from.
 if platform.system() == 'Windows':
     service = Service(executable_path="./chromedriver.exe")
 elif platform.system() == 'Darwin':
@@ -27,12 +27,10 @@ driver.get("https://myaldius.staffbase.com/content/page/609ea1450e49ad1c940fd1ab
 wait = WebDriverWait(driver, 10)
 
 # First Step
-initialSignInButton = wait.until(EC.element_to_be_clickable((By.ID, "public-login-hint")))
-initialSignInButton.click()
+initialSignInButton = wait.until(EC.element_to_be_clickable((By.ID, "public-login-hint"))).click()
 
 # Second Step, Gain Access to Login Input
-credentialSignInButton = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "type-uncollapse")))
-credentialSignInButton.click()
+credentialSignInButton = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "type-uncollapse"))).click()
 
 #Input Username and Password
 inputUsername = driver.find_element(By.ID, "identifier")
