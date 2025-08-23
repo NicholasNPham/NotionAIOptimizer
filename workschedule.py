@@ -93,10 +93,6 @@ dictSchedule.update(scrapeWeek())
 for date, shiftAndHours in dictSchedule.items():
     print(date, timeBlock(shiftAndHours[0], date))
 
-# Function to Turn String Shift into two Strings and into 24 Hours
-
 time.sleep(10)
 
 driver.quit()
-
-# split(-) letting ["2 - 9"] -> [2,9]
