@@ -24,17 +24,19 @@ stringTwo = "2025-08-18"
 def timeBlock(shift, date):
     if shift != "No Shift Scheduled":
         times = shift.split('-')
+        dateTimes = []
         isoTimes = []
+
+        # Crazy that date time already formats as ISO 6801 just needed to added TimeZone
         for time in times:
-            dateTime = datetime.strptime(f"{date} {time.strip()}", "%Y-%m-%d %I:%M %p")
-            dateTime = dateTime.replace(tzinfo=tz)
+            dt = datetime.strptime(f"{date} {time.strip()}", "%Y-%m-%d %I:%M %p")
+            dateTime = dt.replace(tzinfo=tz)
+            dateTimes.append(dateTime)
             isoTimes.append(dateTime.isoformat())
-        return isoTimes
+
+        hours = (dateTimes[1] - dateTimes[0]).total_seconds() / 3600
+        return [isoTimes, hours]
     else:
         noShiftFound = ['No Shift Scheduled', 0]
         return noShiftFound
 
-print(timeBlock(string,stringTwo))
-
-# Calling timeBlock Function
-# print(timeBlock(string))
