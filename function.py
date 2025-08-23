@@ -1,5 +1,8 @@
+import zoneinfo
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
+tz = ZoneInfo("America/New_York")
 
 def newDate(date):
     now = datetime.now()
@@ -14,37 +17,24 @@ def formattedHour(hour):
            removedLetterString.append(char)
     return "".join(removedLetterString)
 
-# Goal is to turn into [YYYY-MM-DD XX:XX AM, YYYY-MM-DD XX:XX PM]
-
-def newFormattedTime(time):
-    lastTwoChars = time[-2:]
-    if time == '12:00 PM':
-        stringTime = '12:00'
-    elif time == '12:00 AM':
-        stringTime = '00:00'
-    elif lastTwoChars == 'PM':
-        addingTime = int(time[:2]) + 12
-        stringTime = f'{addingTime}:{time[3:5]}'
-    else:
-        stringTime = f'{time[0:2]}:{time[3:5]}'
-    return stringTime
-
 # Testing Function String/StringTwo
-# string = '02:00 PM - 09:00 PM'
-# stringTwo = "2-4"
+string = '02:00 PM - 09:00 PM'
+stringTwo = "2025-08-18"
 
 def timeBlock(shift, date):
     if shift != "No Shift Scheduled":
-        delimiter = "-"
-        shift = shift.split(delimiter)
-
-        startTime = f'{date}T{newFormattedTime(shift[0].strip())}:00-05:00'
-        endtime = f"{date}T{newFormattedTime(shift[1].strip())}:00-05:00"
-        timeBlockList = [startTime, endtime]
+        times = shift.split('-')
+        isoTimes = []
+        for time in times:
+            dateTime = datetime.strptime(f"{date} {time.strip()}", "%Y-%m-%d %I:%M %p")
+            dateTime = dateTime.replace(tzinfo=tz)
+            isoTimes.append(dateTime.isoformat())
+        return isoTimes
     else:
-        timeBlockList = ['No Shift Scheduled', 0]
+        noShiftFound = ['No Shift Scheduled', 0]
+        return noShiftFound
 
-    return timeBlockList
+print(timeBlock(string,stringTwo))
 
 # Calling timeBlock Function
 # print(timeBlock(string))
