@@ -10,17 +10,6 @@ def newDate(date):
     isoDate = f'{now.year}-{month:02d}-{day:02d}'
     return isoDate
 
-def formattedHour(hour):
-    removedLetterString = []
-    for char in hour:
-       if char.isdigit() or char == '.':
-           removedLetterString.append(char)
-    return "".join(removedLetterString)
-
-# Testing Function String/StringTwo
-string = '02:00 PM - 09:00 PM'
-stringTwo = "2025-08-18"
-
 def timeBlock(shift, date):
     if shift != "No Shift Scheduled":
         times = shift.split('-')

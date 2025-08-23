@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 
 from key import *
-from function import newDate, formattedHour, timeBlock
+from function import newDate, timeBlock
 
 import time
 import platform
@@ -58,24 +58,12 @@ def scrapeWeek():
         date = days.find_element(By.CSS_SELECTOR, ".cmp-schedule-item__schedule-date__date").text
         date = newDate(date)
 
-        shiftHourList = []
-
         try:
             shift = days.find_element(By.CSS_SELECTOR,".cmp-schedule-item__schedule-content__hours-range.shift .range-hours").text
-            shiftHourList.append(shift)
         except NoSuchElementException:
             shift = "No Shift Scheduled"
-            shiftHourList.append(shift)
 
-        try:
-            hour = days.find_element(By.CSS_SELECTOR, ".total-hour").text
-
-            shiftHourList.append(formattedHour(hour))
-        except NoSuchElementException:
-            hour = 0
-            shiftHourList.append(hour)
-
-        dictSchedule[date] = shiftHourList
+        dictSchedule[date] = timeBlock(shift, date)
 
     return dictSchedule
 
@@ -90,8 +78,10 @@ time.sleep(2)
 # Calling Function Second Time (Updating DictSchedule)
 dictSchedule.update(scrapeWeek())
 
-for date, shiftAndHours in dictSchedule.items():
-    print(date, timeBlock(shiftAndHours[0], date))
+# Listing Dictionary to show date and information
+for date, information in dictSchedule.items():
+    print(date, information)
+
 
 time.sleep(10)
 
