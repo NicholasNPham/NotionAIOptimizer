@@ -1,59 +1,77 @@
-Title: Python AI Schedule Optimizer
+# Python AI Schedule Optimizer
 
-Goal: This project will create an app that will use AI to optimize my schedule created first hand and increase productivity and work flow. 
+## Goal
 
-1. The data supplied from Notion is:
-   2. Events, Tasks, and Priority Levels.
-2. I will either create my own database or use a pre-existing database based on the Notion API or use SQl (Subject to Change).
-3. I want this program to run first off of manual trigger once a day, then eventually
-   4. Provide real time updates.
-   5. AI will read websites based on given information and plan next day for me to evaluate and continue along.
+This project creates an application that uses AI to optimize my schedule, improving productivity and workflow.
 
-Notes: 
-1. To start this project I need to start off with a "work schedule" notion database
-   2. This will be done with Selenium to control the browser and securely login into my employee portal.
-   3. Login info will be kept securely and either methods will control website access for me.
-   4. This is going to be updated automatically on pc start up with Windows Task Scheduler
+The AI will analyze events, tasks, and priority levels from a Notion database (or a local SQL database) and provide suggestions to improve efficiency. Initially, the program will run via manual trigger once per day, with plans to eventually provide **real-time updates**. The AI will also be capable of reading websites based on given information to plan the next day, which I can then review and adjust.
 
-Selenium:
-Link for Educational Purposes: https://www.youtube.com/watch?v=NB8OceGZGjA
+---
 
-August 13, 2025:
-Web scraping my employee website has been done, I now need to move data from the website to Notion Database.
+## Data Source
 
-Example:
+* **Primary Source:** Notion database containing:
 
-Shift: 5:30 AM - 1:30 PM - cmp-schedule-item__schedule-content__hours-range
-Date: 8-11 - cmp-schedule-item__schedule-date
-Hours: 8 - total-hours
-Status: Completed 
+  * Events
+  * Tasks
+  * Priority levels
+* **Secondary Source:** Employee portal via web scraping with Selenium.
+* Selenium will securely log in and collect work schedules.
 
-The Status property will have 3 statuses:
-   completed; past,
-   today; today shift,
-   upcoming; future date based on today's date, import time
+---
 
-Three Type of scheduled shifts:
-   working,
-   no scheduled shifts,
-   Day off.
+## Project Workflow
 
-Notes for Notion Database:
-1. The "Hour" string will have to turn into a integer removing "hs" keeping the decimal point
-2. The "date" string will have to be converted to a iso format YYYY-MM-DD to allow database read
-3. the "shift" string will be split into two strings, example:
-   4. '5:30 AM - 2:00 PM'
-   5. '5:30 AM' , '2:00 PM'
-   6. date + start time, date + end time
+1. **Scrape Work Schedule**
 
-After this this will allow me to input data to notion database and create time blocks automatically.
+   * Selenium automates login to the employee portal.
+   * Login credentials are stored securely.
+   * Data scraped includes:
 
-August 19th, 2025:
-Added function to turn date into ISO date and it worked well, need to figure out how to create two different time dates that creates start time and end time to create time blocks on notion calendar database.
-also going to optimize code to use less lines getting really long. might focus on how code should look like.
+     * Shift times (e.g., `5:30 AM - 1:30 PM`)
+     * Date (e.g., `8-11`)
+     * Hours worked (e.g., `8 hs`)
 
-Pep 8 formatting for Python Code: https://peps.python.org/pep-0008/
+2. **Data Processing**
 
-August 22th, 2025:
-I have optimized the code so much that most of my code is now ready for automation into notion database. The lesson I learned that AI will always improve productivity and optimization however I will not allow AI to code for me, I will only use it to guide me and tutor me.
-Most function has been deleted do to becoming obsolete, and timeBlock and scrapeWeek has been improved and became powerful.
+   * Convert `hours` strings to floats (removing “hs”).
+   * Convert `date` strings to ISO format (`YYYY-MM-DD`) for Notion compatibility.
+   * Split shift strings into `start time` and `end time`.
+   * Combine date and time to create **time blocks** for the Notion calendar database.
+
+3. **Notion Database**
+
+   * Status property with three states:
+
+     * **Completed/Past:** Shifts that have already occurred
+     * **Today:** Current shift
+     * **Upcoming/Future:** Future shifts
+   * Three types of scheduled shifts:
+
+     * Working
+     * No scheduled shifts
+     * Day off
+
+---
+
+## Key Milestones
+
+* **August 13, 2025:** Completed web scraping of employee website. Next step is importing the data into Notion.
+* **August 19, 2025:** Added function to convert dates to ISO format. Planning to generate start and end datetime objects for time blocks.
+* **August 22, 2025:** Optimized code extensively. Most obsolete functions removed. `timeBlock` and `scrapeWeek` are now fully functional and ready for automation in Notion. Key lesson: AI improves productivity and provides guidance, but coding is done manually for learning and control.
+
+---
+
+## References
+
+* [PEP 8 Python Style Guide](https://peps.python.org/pep-0008/)
+* [Selenium Tutorial (YouTube)](https://www.youtube.com/watch?v=NB8OceGZGjA)
+
+---
+
+## Notes
+
+* The project will be initially triggered manually once per day.
+* Future versions will automate updates on PC startup using Windows Task Scheduler.
+* The AI will guide scheduling optimizations but **will not write code automatically**.
+
