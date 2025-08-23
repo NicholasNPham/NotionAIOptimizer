@@ -53,3 +53,7 @@ Added function to turn date into ISO date and it worked well, need to figure out
 also going to optimize code to use less lines getting really long. might focus on how code should look like.
 
 Pep 8 formatting for Python Code: https://peps.python.org/pep-0008/
+
+August 22th, 2025:
+I have optimized the code so much that most of my code is now ready for automation into notion database. The lesson I learned that AI will always improve productivity and optimization however I will not allow AI to code for me, I will only use it to guide me and tutor me.
+Most function has been deleted do to becoming obsolete, and timeBlock and scrapeWeek has been improved and became powerful.
