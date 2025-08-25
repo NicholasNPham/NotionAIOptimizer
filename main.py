@@ -20,6 +20,7 @@ for page in response['results']:
     Research:
     First point: Data is updated creating the database with 14 entries
         - once the second monday has been reach, remove previous 7 days and update with the next 7 days
+    
     Second point: what happens if any day has been updating or shift has been change?
         - then i need to have a checker function: if no shift has been set, remove no shift and add shift,
         - if shift is already present, remove shift start and end time and update new shift start and end time.
