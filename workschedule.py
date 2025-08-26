@@ -79,10 +79,11 @@ time.sleep(2)
 dictSchedule.update(scrapeWeek())
 
 # Listing Dictionary to show date and information
-for date, information in dictSchedule.items():
-    print(date, information)
+# Uncomment to check dictSchedule
+# for date, information in dictSchedule.items():
+#     print(date, information)
 
 
-time.sleep(10)
+time.sleep(1)
 
 driver.quit()

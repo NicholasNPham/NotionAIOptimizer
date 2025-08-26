@@ -1,7 +1,7 @@
 from notion_client import Client
 
 # File Imports
-# from workschedule import dictSchedule
+from workschedule import dictSchedule
 from key import *
 
 # Initialize client with your token
@@ -23,7 +23,7 @@ testDictionary = {
     "2025-08-26": [['2025-08-26T14:00:00-04:00', '2025-08-26T21:00:00-04:00'], 7.0]
 }
 
-for key, value in testDictionary.items():
+for key, value in dictSchedule.items():
 
     if value[0] == "No Shift Scheduled":
         shiftProperties = key
@@ -35,11 +35,20 @@ for key, value in testDictionary.items():
         endTimeProperties = value[0][1]
         hourProperties = value[1]
 
-    print(shiftProperties)
-    print(startTimeProperties)
-    print(endTimeProperties)
-    print(hourProperties)
+    textProperty = [{"text": {"content": shiftProperties}}]
+    if startTimeProperties == None and endTimeProperties == None:
+        dateProperty = {"date": None}
+    else:
+        dateProperty = {"date": {"start": startTimeProperties, "end": endTimeProperties}}
+    hourProperty = {"number": hourProperties}
 
+    properties = {
+        "Shift": textProperty,
+        "Start Time": dateProperty,
+        "Hours": hourProperty
+    }
+
+    print(properties)
 
 """
 
