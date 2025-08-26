@@ -1,4 +1,7 @@
 from notion_client import Client
+
+# File Imports
+# from workschedule import dictSchedule
 from key import *
 
 # Initialize client with your token
@@ -13,9 +16,32 @@ response = notion.databases.query(database_id=database_id)
 # Print the results
 for page in response['results']:
     properties = page['properties']
-    print(properties)  # you can format this based on your database properties
+    # print(properties)
 
-    """
+testDictionary = {
+    "2025-08-25": ["No Shift Scheduled", 0],
+    "2025-08-26": [['2025-08-26T14:00:00-04:00', '2025-08-26T21:00:00-04:00'], 7.0]
+}
+
+for key, value in testDictionary.items():
+
+    if value[0] == "No Shift Scheduled":
+        shiftProperties = key
+        startTimeProperties, endTimeProperties = None, None
+        hourProperties = value[1]
+    else:
+        shiftProperties = key
+        startTimeProperties = value[0][0]
+        endTimeProperties = value[0][1]
+        hourProperties = value[1]
+
+    print(shiftProperties)
+    print(startTimeProperties)
+    print(endTimeProperties)
+    print(hourProperties)
+
+
+"""
 
     Research:
     First point: Data is updated creating the database with 14 entries
@@ -29,4 +55,4 @@ for page in response['results']:
     also i want to learn about branching from main to learn about about github repository and learning to actually SWE
     big big project, class as started so project will inevitably slow down. But project is to fun to stop now.
 
-    """
+"""
