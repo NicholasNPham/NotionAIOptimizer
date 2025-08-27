@@ -8,12 +8,12 @@ from key import *
 notion = Client(auth=secret)
 
 # Your database ID
-database_id = dbID
+database_id = pageID
 
 # Query the database
 response = notion.databases.query(database_id=database_id)
 
-# Print the results
+# Print the results, Uncomment to print
 for page in response['results']:
     properties = page['properties']
     # print(properties)
@@ -22,6 +22,12 @@ testDictionary = {
     "2025-08-25": ["No Shift Scheduled", 0],
     "2025-08-26": [['2025-08-26T14:00:00-04:00', '2025-08-26T21:00:00-04:00'], 7.0]
 }
+
+# Finding Valid Page ID
+results = notion.databases.query(database_id=pageID)
+for page in results['results']:
+    validPageID = page['id']
+    print(validPageID)
 
 for key, value in dictSchedule.items():
 
@@ -48,7 +54,13 @@ for key, value in dictSchedule.items():
         "Hours": hourProperty
     }
 
-    print(properties)
+    # Try Block to update database "Work Schedule Database"
+    try:
+        response = notion.pages.update(page_id=validPageID, properties=dateProperty)
+        print("page updated", response)
+    except Exception as e:
+        print(f'error updating page {e}')
+
 
 """
 
