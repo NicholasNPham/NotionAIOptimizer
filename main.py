@@ -1,7 +1,7 @@
 from notion_client import Client
 
 # File Imports
-from workschedule import dictSchedule
+from workschedule import reversedDictSchedule
 from key import *
 
 # Initialize client with your token
@@ -29,7 +29,7 @@ results = notion.databases.query(database_id=pageID)
 pages = results['results']
 
 # Zip called to pair elements from the two dictionaries that turned into lists
-for page, (key, value) in zip(pages, dictSchedule.items()):
+for page, (key, value) in zip(pages, reversedDictSchedule.items()):
     rowID = page['id']
     textProperty = {"Shift": {"title": [{"text": {"content": key}}]}}
 

@@ -78,6 +78,13 @@ time.sleep(2)
 # Calling Function Second Time (Updating DictSchedule)
 dictSchedule.update(scrapeWeek())
 
+# Reversing dictSchedule
+reversedDictSchedule = {}
+for key in reversed(dictSchedule):
+    reversedDictSchedule[key] = dictSchedule[key]
+
+print(reversedDictSchedule)
+
 # Listing Dictionary to show date and information
 # Uncomment to check dictSchedule
 # for date, information in dictSchedule.items():
