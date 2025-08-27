@@ -75,3 +75,15 @@ The AI will analyze events, tasks, and priority levels from a Notion database (o
 * Future versions will automate updates on PC startup using Windows Task Scheduler.
 * The AI will guide scheduling optimizations but **will not write code automatically**.
 
+
+Research:
+First point: Data is updated creating the database with 14 entries
+- once the second monday has been reach, remove previous 7 days and update with the next 7 days
+    
+Second point: what happens if any day has been updating or shift has been change?
+- then i need to have a checker function: if no shift has been set, remove no shift and add shift,
+- if shift is already present, remove shift start and end time and update new shift start and end time.
+
+Seems easy enough being typed, need to learn notion api and how to update, remove times.
+also i want to learn about branching from main to learn about about github repository and learning to actually SWE
+big big project, class as started so project will inevitably slow down. But project is to fun to stop now.
