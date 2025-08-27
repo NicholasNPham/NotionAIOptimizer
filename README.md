@@ -87,3 +87,7 @@ Second point: what happens if any day has been updating or shift has been change
 Seems easy enough being typed, need to learn notion api and how to update, remove times.
 also i want to learn about branching from main to learn about about github repository and learning to actually SWE
 big big project, class as started so project will inevitably slow down. But project is to fun to stop now.
+
+Notes to add
+Started new test branch "test-branchV2"
+working on getting date time to be inputted into database from reversed dictSchedule, must be formatted correctly
