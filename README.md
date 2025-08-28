@@ -71,23 +71,15 @@ The AI will analyze events, tasks, and priority levels from a Notion database (o
 
 ## Notes
 
-* The project will be initially triggered manually once per day.
-* Future versions will automate updates on PC startup using Windows Task Scheduler.
-* The AI will guide scheduling optimizations but **will not write code automatically**.
-
-
-Research:
-First point: Data is updated creating the database with 14 entries
-- once the second monday has been reach, remove previous 7 days and update with the next 7 days
-    
-Second point: what happens if any day has been updating or shift has been change?
-- then i need to have a checker function: if no shift has been set, remove no shift and add shift,
-- if shift is already present, remove shift start and end time and update new shift start and end time.
-
-Seems easy enough being typed, need to learn notion api and how to update, remove times.
-also i want to learn about branching from main to learn about about github repository and learning to actually SWE
-big big project, class as started so project will inevitably slow down. But project is to fun to stop now.
-
-Notes to add
-Started new test branch "test-branchV2"
-working on getting date time to be inputted into database from reversed dictSchedule, must be formatted correctly
+## Notes
+- Project is triggered **manually once per day** (future: automated at PC startup via Windows Task Scheduler).  
+- Currently working on getting datetime values into the database from `reversed dictSchedule` (must be formatted correctly).  
+- **Research:**  
+  - Database should always hold 14 entries.  
+  - When the **second Monday** is reached → remove the previous 7 days and add the next 7 days.  
+  - If a shift changes:  
+    - If no shift was set → remove “no shift” and add the new shift.  
+    - If a shift was already present → remove old start/end times and update with the new ones.  
+- Will require learning **Notion API** operations: create, update, and delete entries.  
+- Started a new test branch: **`test-branchV2`** to practice Git branching and improve SWE workflow.  
+- Project pace may slow due to class schedule, but this remains a long-term project that’s *too fun to stop*.  
