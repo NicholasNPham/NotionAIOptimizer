@@ -18,11 +18,6 @@ for page in response['results']:
     properties = page['properties']
     # print(properties)
 
-testDictionary = {
-    "2025-08-25": ["No Shift Scheduled", 0],
-    "2025-08-26": [['2025-08-26T14:00:00-04:00', '2025-08-26T21:00:00-04:00'], 7.0]
-}
-
 # Results gets all the database rows in a dictionary
 results = notion.databases.query(database_id=pageID)
 # The pages variable stores the list of page objects
@@ -31,31 +26,21 @@ pages = results['results']
 # Zip called to pair elements from the two dictionaries that turned into lists
 for page, (key, value) in zip(pages, reversedDictSchedule.items()):
     rowID = page['id']
+    # Format dictionary of shift date as text in NOTION API SCHEMA
     textProperty = {"Shift": {"title": [{"text": {"content": key}}]}}
+    # Format dictionary of hours scheduled in NOTION API SCHEMA
+    hourProperty = {"Hour": {"number": value[1]}}
+    # Format dictionary of shift time in NOTION API SCHEMA
+    if value[0] == "No Shift Scheduled":
+        dateProperty = {"Date": {"date": None}}
+    else:
+        dateProperty = {"Date": {"date": {"start": value[0][0], "end": value[0][1]}}}
+
+    # Code Below will be to create a variable containing text,hour,date property to update 3 in 1 per 1 in 14 days
 
     # Try Block to update database "Work Schedule Database"
     try:
-        response = notion.pages.update(page_id=rowID, properties=textProperty)
+        response = notion.pages.update(page_id=rowID, properties=dateProperty)
         print("page updated", response)
     except Exception as e:
         print(e)
-
-# This is CODE HELL VVVV WILL BE CHANGED
-
-    # if value[0] == "No Shift Scheduled":
-    #     startTimeProperties, endTimeProperties = None, None
-    #     hourProperties = value[1]
-    # else:
-    #     startTimeProperties = value[0][0]
-    #     endTimeProperties = value[0][1]
-    #     hourProperties = value[1]
-
-    # if startTimeProperties == None and endTimeProperties == None:
-    #     dateProperty = {"date": None}
-    # else:
-    #     dateProperty = {"date": {"start": startTimeProperties, "end": endTimeProperties}}
-    # hourProperty = {"number": hourProperties}
-    #
-    # properties = {"Shift": textProperty, "Start Time": dateProperty, "Hours": hourProperty}
-
-
