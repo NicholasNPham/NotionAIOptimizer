@@ -3,6 +3,7 @@ from notion_client import Client
 # File Imports
 from workschedule import reversedDictSchedule
 from key import *
+from datetime import datetime
 
 # Initialize client with your token
 notion = Client(auth=secret)
@@ -26,8 +27,23 @@ pages = results['results']
 # Zip called to pair elements from the two dictionaries that turned into lists
 for page, (key, value) in zip(pages, reversedDictSchedule.items()):
     rowID = page['id']
-    # Format dictionary of shift date as text in NOTION API SCHEMA
-    textProperty = {"title": [{"text": {"content": key}}]}
+    # Give name variable a string to open,close and etc.
+    if value[0] != 'No Shift Scheduled':
+            startTime = value[0][0][:22] + value[0][1][-2:]
+            endTime = value[0][1][:22] + value[0][1][-2:]
+            dt = datetime.strptime(startTime, "%Y-%m-%dT%H:%M:%S%z")
+            dt2 = datetime.strptime(endTime, "%Y-%m-%dT%H:%M:%S%z")
+            if dt.strftime("%H:%M") == "05:30":
+                name = "Opening Shift"
+            elif dt2.strftime("%H:%M") == "21:00":
+                name = "Closing Shift"
+            elif dt.strftime("%H:%M") == "9:00":
+                name = "Curbside Shift"
+            else:
+                name = "Misc Shift"
+    else:
+        name = "No Shift Scheduled"
+    textProperty = {"title": [{"text": {"content": name}}]}
     # Format dictionary of hours scheduled in NOTION API SCHEMA
     hourProperty = {"number": value[1]}
     # Format dictionary of shift time in NOTION API SCHEMA
