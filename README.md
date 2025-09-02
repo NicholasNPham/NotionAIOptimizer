@@ -60,7 +60,7 @@ The AI will analyze events, tasks, and priority levels from a Notion database (o
 * **August 19, 2025:** Added function to convert dates to ISO format. Planning to generate start and end datetime objects for time blocks.
 * **August 22, 2025:** Optimized code extensively. Most obsolete functions removed. `timeBlock` and `scrapeWeek` are now fully functional and ready for automation in Notion. Key lesson: AI improves productivity and provides guidance, but coding is done manually for learning and control.
 * **August 31, 2025:** Bulk of Scraping data (Shift, Time, Hour) has been finished. Will be working on naming the shifts correctly. After done correctly, it will be fully functional to import data into my Notion Database Calendar to be read correctly and the naming convention will know what shift it is.
-* **September 1, 2025: ** Phase 1 of Code Complete. Phase two: Either task scheduler upon running pc from wake or turning selenium into a silent run program. 
+* **September 1, 2025:** Phase 1 of Code Complete. Phase two: Either task scheduler upon running pc from wake or turning selenium into a silent run program. 
 ---
 
 ## References
