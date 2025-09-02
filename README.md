@@ -48,6 +48,13 @@ The AI will also be capable of reading websites based on given information to pl
      - Day off  
    - Current focus: **automation** and correct import of shifts.  
 
+4. **Python Daemon (Future Automation)**  
+   - **Purpose:** Create a background script to run `main.py` automatically during specific system events, such as:  
+     - Waking from sleep  
+     - Logging on  
+     - Unlocking the computer  
+   - This will be the **first evolution of automation** beyond manual execution.  
+   - Current focus: learn about Python daemons and how to implement them safely and effectively.
 ---
 
 ## 🗓 Key Milestones
