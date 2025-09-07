@@ -22,6 +22,8 @@ else:
 driver = webdriver.Chrome(service=service)
 wait = WebDriverWait(driver, 10)
 
+print("Running Selenium Driver...")
+
 # Website link to Employee Portal (ALDI)
 driver.get("https://myaldius.staffbase.com/content/page/609ea1450e49ad1c940fd1ab")
 
@@ -83,7 +85,7 @@ reversedDictSchedule = {}
 for key in reversed(dictSchedule):
     reversedDictSchedule[key] = dictSchedule[key]
 
-print(reversedDictSchedule)
+# print(reversedDictSchedule)
 
 # Listing Dictionary to show date and information
 # Uncomment to check dictSchedule
@@ -94,3 +96,5 @@ print(reversedDictSchedule)
 time.sleep(1)
 
 driver.quit()
+
+print("Finished Running Selenium Driver")
