@@ -70,6 +70,9 @@ The AI will also be capable of reading websites based on given information to pl
 - [PEP 8 Python Style Guide](https://peps.python.org/pep-0008/)  
 - [Selenium Tutorial (YouTube)](https://www.youtube.com/watch?v=NB8OceGZGjA)  
 - [Notion API Documentation](https://developers.notion.com/docs)  
+- [Creating Desktop Apps With Python](https://www.youtube.com/watch?v=PdsoDG0GKdA)  
+- [Daemon Processes In Python](https://superfastpython.com/daemon-process-in-python/) 
+- [Tkinter](https://docs.python.org/3/library/tkinter.html) 
 
 ---
 
