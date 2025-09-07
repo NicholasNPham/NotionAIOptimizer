@@ -17,7 +17,7 @@ response = notion.databases.query(database_id=database_id)
 # Print the results, Uncomment to print
 for page in response['results']:
     properties = page['properties']
-    print(properties)
+    # print(properties)
 
 # Results gets all the database rows in a dictionary
 results = notion.databases.query(database_id=pageID)
