@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.chrome.options import Options
 
 from key import *
 from function import newDate, timeBlock
@@ -19,7 +20,10 @@ elif platform.system() == 'Darwin':
 else:
     raise OSError("Unsupported Platform or ChromeDriver not Found")
 
-driver = webdriver.Chrome(service=service)
+# Headless Mode
+chromeOptions = Options()
+chromeOptions.add_argument("--headless=new")
+driver = webdriver.Chrome(service=service, options=chromeOptions)
 wait = WebDriverWait(driver, 10)
 
 print("Running Selenium Driver...")
