@@ -85,7 +85,8 @@ The AI will also be capable of reading websites based on given information to pl
   - Waking from sleep  
   - Logging on  
   - Unlocking the computer  
-  - This will be the **first evolution of automation** beyond manual execution.  
+  - This will be the **first evolution of automation** beyond manual execution.
+  - Most Possible: When Resume from Computer Sleep State -> resume program and run `main.py`.
 
 ---
 
