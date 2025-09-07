@@ -3,13 +3,17 @@
 ## 📌 Goal
 This project creates an application that uses AI to optimize my schedule, improving productivity and workflow.
 
-The AI analyzes events, tasks, and priority levels from a Notion database (or a local SQL database) and provides suggestions to improve efficiency.  
+The AI analyzes events, tasks, and priority levels from a Notion database and provides suggestions to improve efficiency.  
 Execution phases:  
 1. **Manual file run** (current)  
 2. **Daemon automation**  
 3. **Windows Task Scheduler research**  
 
 The AI will also be capable of reading websites based on given information to plan the next day, which I can then review and adjust.
+
+---
+
+## 1️⃣ PHASE 1:
 
 ---
 
@@ -20,9 +24,7 @@ The AI will also be capable of reading websites based on given information to pl
   - Priority levels  
 
 - **Secondary Source:** Employee portal (web scraping with Selenium).  
-  - Selenium securely logs in and collects work schedules.  
-
----
+  - Selenium securely logs in and collects work schedules.
 
 ## ⚙️ Workflow
 1. **Scrape Work Schedule**  
@@ -45,16 +47,8 @@ The AI will also be capable of reading websites based on given information to pl
    - Future iterations will include coding shift types:  
      - Working  
      - No scheduled shifts  
-     - Day off  
-   - Current focus: **automation** and correct import of shifts.  
+     - Day off
 
-4. **Python Daemon (Future Automation)**  
-   - **Purpose:** Create a background script to run `main.py` automatically during specific system events, such as:  
-     - Waking from sleep  
-     - Logging on  
-     - Unlocking the computer  
-   - This will be the **first evolution of automation** beyond manual execution.  
-   - Current focus: learn about Python daemons and how to implement them safely and effectively.
 ---
 
 ## 🗓 Key Milestones
@@ -63,6 +57,37 @@ The AI will also be capable of reading websites based on given information to pl
 - **Aug 22, 2025** → Optimized code. `timeBlock` and `scrapeWeek` ready for Notion automation. Lesson: AI guides, but coding done manually for learning and control.  
 - **Aug 31, 2025** → Bulk of scraping done. Working on naming shifts correctly for proper Notion import.  
 - **Sep 1, 2025** → Phase 1 complete. Phase 2: Manual file run → Daemon → Task Scheduler research.  
+
+---
+
+## 2️⃣ PHASE 2:
+
+---
+## ⚙️ Workflow
+1. **Desktop Shortcut for Tkinter App**
+- Create a shortcut on your desktop that directly runs the Python Tkinter application (`.py` file).
+- Steps:
+  1. Ensure Python is installed and the `tkinter.py` file runs correctly.
+  2. Create a new shortcut on your desktop.
+  3. Set the target to: `python "path TBD"`.
+  4. assign a custom icon for the shortcut.
+- Double-clicking the shortcut launches the Tkinter app without opening the terminal manually.
+
+2. **Tkinter App**
+- A simple GUI to manage background processes with a clean, user-friendly interface.
+- Features:
+  - **Run** and **Kill** buttons to start or stop the selected process.
+  - **Dropdown menu** to choose the type of background process (e.g., Daemon).
+  - Designed for easy expansion to add more process types in the future.
+- Provides a visual way to control automation scripts without using the terminal.
+
+3. **Python Daemon**  
+
+- **Purpose:** Create a background script to run `main.py` automatically during specific system events, such as:  
+  - Waking from sleep  
+  - Logging on  
+  - Unlocking the computer  
+  - This will be the **first evolution of automation** beyond manual execution.  
 
 ---
 
