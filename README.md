@@ -15,7 +15,6 @@ The AI will also be capable of reading websites based on given information to pl
 
 ## 1️⃣ PHASE 1:
 
----
 
 ## 📂 Data Sources
 - **Primary Source:** Notion database containing:  
@@ -49,7 +48,6 @@ The AI will also be capable of reading websites based on given information to pl
      - No scheduled shifts  
      - Day off
 
----
 
 ## 🗓 Key Milestones
 - **Aug 13, 2025** → Completed web scraping of employee website. Next step: importing into Notion.  
@@ -62,7 +60,7 @@ The AI will also be capable of reading websites based on given information to pl
 
 ## 2️⃣ PHASE 2:
 
----
+
 ## ⚙️ Workflow
 1. **Desktop Shortcut for Tkinter App**
 - Create a shortcut on your desktop that directly runs the Python Tkinter application (`.py` file).
