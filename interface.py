@@ -76,10 +76,12 @@ comboBox.pack(pady=20, anchor='center',expand=True)
 buttonFrame = tk.Frame(root, bg="#222222")
 buttonFrame.pack()
 
-startButton = tk.Button(buttonFrame, text="START", command=show, background="#222222")
+boldFont = ("Helvetica", 10, "bold")
+
+startButton = tk.Button(buttonFrame, text="START",font=boldFont, command=show, background="#222222")
 startButton.pack(side=tk.LEFT, padx=5, pady=5)
 
-terminateButton = tk.Button(buttonFrame, text="TERMINATE", command=remove, background="#222222")
+terminateButton = tk.Button(buttonFrame, text="TERMINATE", font=boldFont, command=remove, background="#222222")
 terminateButton.pack(side=tk.LEFT, padx=5, pady=5)
 
 #Display text after button is pressed
