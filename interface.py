@@ -1,6 +1,12 @@
 import tkinter as tk
 from tkinter import ttk
-import time
+from pyshortcuts import make_shortcut
+
+make_shortcut(r"E:\PycharmProjects\NotionAIOptimizer\interface.py",
+              name="DAEMON",
+              icon=r"E:\PycharmProjects\NotionAIOptimizer\samurai.ico",
+              desktop=True,
+              terminal=False)
 
 # Display Settings
 root = tk.Tk()
@@ -52,6 +58,7 @@ def show():
     if comboBox.get() == "Choose a Process...":
         label.config(text="ERROR: CHOOSE A PROCESS")
     elif comboBox.get() == "DAEMON":
+        print("working")
         label.config(text="DAEMON PROCESS RUNNING")
     else:
         label.config(text="ERROR: PROCESS NOT DEVELOPED")
