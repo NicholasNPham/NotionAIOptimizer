@@ -1,12 +1,5 @@
 import tkinter as tk
 from tkinter import ttk
-from pyshortcuts import make_shortcut
-
-make_shortcut(r"E:\PycharmProjects\NotionAIOptimizer\interface.py",
-              name="DAEMON",
-              icon=r"E:\PycharmProjects\NotionAIOptimizer\samurai.ico",
-              desktop=True,
-              terminal=False)
 
 # Display Settings
 root = tk.Tk()
