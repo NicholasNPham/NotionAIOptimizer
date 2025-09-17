@@ -13,9 +13,9 @@ import platform
 
 # Check to see which OS coding is running from.
 if platform.system() == 'Windows':
-    service = Service(executable_path="./chromedriver.exe")
+    service = Service(executable_path="WebScrape/chromedriver.exe")
 elif platform.system() == 'Darwin':
-    service = Service(executable_path="./chromedriver")
+    service = Service(executable_path="WebScrape/chromedriver")
 else:
     raise OSError("Unsupported Platform or ChromeDriver not Found")
 
