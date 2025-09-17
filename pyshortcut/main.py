@@ -1,27 +1,61 @@
 import win32com.client
+import sys
 
-# Testing Functionality
-shell = win32com.client.Dispatch("WScript.Shell")
-shortcut = shell.CreateShortCut( r"C:\Users\phamn\OneDrive\Desktop\DAEMON.lnk")
-shortcut.TargetPath = r"C:\Users\phamn\AppData\Local\Programs\Python\Launcher\pyw.exe" # Change between py.exe for show and pyw.exe to not show
-shortcut.Arguments = r"E:\PycharmProjects\NotionAIOptimizer\DAEMON\interface.py"
-shortcut.WorkingDirectory = r"E:\PycharmProjects\NotionAIOptimizer\DAEMON"
-shortcut.IconLocation = r'E:\PycharmProjects\NotionAIOptimizer\DAEMON\samurai.ico'
-shortcut.save()
+# # Testing Functionality
+# shell = win32com.client.Dispatch("WScript.Shell") #
+# shortcut = shell.CreateShortCut( r"C:\Users\phamn\OneDrive\Desktop\DAEMON.lnk") #
+# shortcut.TargetPath = r"E:\PycharmProjects\NotionAIOptimizer\.venv\Scripts\pythonw.exe" # Change between py.exe for show and pyw.exe to not show
+# shortcut.Arguments = r"E:\PycharmProjects\NotionAIOptimizer\DAEMON\interface.py" #
+# shortcut.WorkingDirectory = r"E:\PycharmProjects\NotionAIOptimizer\DAEMON" #
+# shortcut.IconLocation = r'E:\PycharmProjects\NotionAIOptimizer\DAEMON\samurai.ico'
+# shortcut.save()
+
 
 # Main Function to Run
-def createPythonShortcut(path=None, name=None, icon=None, terminal=None):
+def createPythonShortcut(targetFile=None, targetFileDir=None, name=None, icon=None, terminal=None):
 
+    # Allows Python File to communciate to Windows' Scripting/Automation System
     shell = win32com.client.Dispatch("WScript.Shell")
 
+    # Finding python executable
+    terminalTrue = sys.executable
+    # Run Terminal or No Terminal
+    termConversion = terminalTrue.split("\\")
+    termConversion.pop(-1)
+    termConversion.append("pythonw.exe")
+    terminalFalse = "\\".join(termConversion)
+
+
+    # This is Where the .lnk file is created at
     lnkFileLocation = rf"{shell.SpecialFolders("Desktop")}" + rf"\{name}.lnk"
-
+    # This is to use a specified .ico file for icon
     iconFile = icon
+    # Which file to run Argument
+    argument = targetFile
+    # Target File Directory
+    argumentDir = targetFileDir
 
-    pathDirectory = path
-    desktopName = name
-    terminalBool = terminal
-    return lnkFileLocation
+    # COM Object
+    shortcut = shell.CreateShortCut(lnkFileLocation)
+
+    if terminal == True:
+        shortcut.TargetPath = terminalTrue
+    else:
+        shortcut.TargetPath = terminalFalse
+
+    shortcut.Arguments = argument
+
+    shortcut.WorkingDirectory = argumentDir
+
+    shortcut.IconLocation = iconFile
+
+    shortcut.save()
+
+    # return lnkFileLocation, iconFile, argument, argumentDir, shortcut.TargetPath
 
 # Testing Main Function
-print(createPythonShortcut(name="test"))
+createPythonShortcut(r"E:\PycharmProjects\NotionAIOptimizer\DAEMON\interface.py",
+                     r"E:\PycharmProjects\NotionAIOptimizer\DAEMON",
+                     "DAEMON",
+                     r'E:\PycharmProjects\NotionAIOptimizer\DAEMON\samurai.ico',
+                     False)
