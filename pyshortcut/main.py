@@ -1,18 +1,23 @@
-from win32com.client import Dispatch
+import win32com.client
 
-#breaks bad
-
-shell = Dispatch("WScript.Shell")
-shortcut = shell.Run("python main.py")
-shortcut.Execute()
-
-
-
+# Testing Functionality
+shell = win32com.client.Dispatch("WScript.Shell")
+shortcut = shell.CreateShortCut( r"C:\Users\phamn\OneDrive\Desktop\DAEMON.lnk")
+shortcut.TargetPath = r"E:\PycharmProjects\NotionAIOptimizer\DAEMON\daemon.py"
+shortcut.WorkingDirectory = r"C:\Users\phamn\OneDrive\Desktop"
+shortcut.save()
 
 # Main Function to Run
-def createShortcut(path=None, name=None, icon=None, terminal=None):
+def createPythonShortcut(path=None, name=None, icon=None, terminal=None):
+
+    shell = win32com.client.Dispatch("WScript.Shell")
+    lnkFileLocation = rf"{shell.SpecialFolders("Desktop")}" + rf"\{name}.lnk"
+
     pathDirectory = path
     desktopName = name
     iconFile = icon
     terminalBool = terminal
-    return pathDirectory, desktopName, iconFile, terminalBool
+    return lnkFileLocation
+
+# Testing Main Function
+print(createPythonShortcut(name="test"))
