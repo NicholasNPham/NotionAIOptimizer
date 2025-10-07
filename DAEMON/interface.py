@@ -1,5 +1,12 @@
 import tkinter as tk
 from tkinter import ttk
+from pyscut import createPythonShortcut
+
+createPythonShortcut(r"E:\PycharmProjects\NotionAIOptimizer\DAEMON\interface.py",
+                     r"E:\PycharmProjects\NotionAIOptimizer\DAEMON",
+                     "DAEMON",
+                     r'E:\PycharmProjects\NotionAIOptimizer\DAEMON\samurai.ico',
+                     True)
 
 # Display Settings
 root = tk.Tk()
