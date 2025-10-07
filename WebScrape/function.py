@@ -1,5 +1,5 @@
 import zoneinfo
-from datetime import datetime
+from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
 tz = ZoneInfo("America/New_York")
@@ -22,6 +22,10 @@ def timeBlock(shift, date):
             dateTime = dt.replace(tzinfo=tz)
             dateTimes.append(dateTime)
             isoTimes.append(dateTime.isoformat())
+
+        # if dateTimes[1] < dateTimes[0]:
+        #     dateTimes[1] += timedelta(days=1)
+
 
         hours = (dateTimes[1] - dateTimes[0]).total_seconds() / 3600
         return [isoTimes, hours]
